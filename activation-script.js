@@ -18,7 +18,7 @@
         	var experiment = optimizely.allExperiments[id];
           if (experiment.enabled === true && experiment.activation_mode == 'manual') {
           	// check the URL targeting and activate as necessary
-            for (i = 0; i < experiment.urls.length; i++) {
+            for (var i = 0; i < experiment.urls.length; i++) {
             	var pageURL = experiment.urls[i];
               if (pageURL.match == 'simple' && simpleMatch(page, pageURL.value)) {
               	activated = true;
