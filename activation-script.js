@@ -48,21 +48,30 @@
 		}
 	}, 500);
   
+  
   function simpleMatch(url1, url2) {
-    url1 = url1.replace("http://", "").replace("https://", "");
-    url1 = url1.indexOf('?') > -1 ? url1.substring(0, url1.indexOf('?')) : url1;
-    url2 = url2.replace("http://", "").replace("https://", "");
-    url2 = url2.indexOf('?') > -1 ? url2.substring(0, url2.indexOf('?')) : url2;
-    return url1 == url2;
-	}
-
-  function exactMatch(url1, url2) {
+      url1 = url1.replace("http://", "").replace("https://", "").replace("www.", "");
+      url1 = url1.indexOf('?') > -1 ? url1.substring(0, url1.indexOf('?')) : url1;
+      url1 = url1.lastIndexOf('/') == (url1.length - 1) ? url1.substring(0, url1.lastIndexOf('/')) : url1;
+      url2 = url2.replace("http://", "").replace("https://", "").replace("www.", "");
+      url2 = url2.indexOf('?') > -1 ? url2.substring(0, url2.indexOf('?')) : url2;
+      url2 = url2.lastIndexOf('/') == (url2.length - 1) ? url2.substring(0, url2.lastIndexOf('/')) : url2;
       return url1 == url2;
-  }
+    }
 
-  function substringMatch(url1, url2) {
+    function exactMatch(url1, url2) {
+      url1 = url1.replace("http://", "").replace("https://", "").replace("www.", "").replace("/?", "?");
+      url1 = url1.lastIndexOf('/') == (url1.length - 1) ? url1.substring(0, url1.lastIndexOf('/')) : url1;
+      url2 = url2.replace("http://", "").replace("https://", "").replace("www.", "").replace("/?", "?");
+      url2 = url2.lastIndexOf('/') == (url2.length - 1) ? url2.substring(0, url2.lastIndexOf('/')) : url2;
+      return url1 == url2;
+    }
+
+    function substringMatch(url1, url2) {
+      url1 = url1.lastIndexOf('/') == (url1.length - 1) ? url1.substring(0, url1.lastIndexOf('/')) : url1;
+      url2 = url2.lastIndexOf('/') == (url2.length - 1) ? url2.substring(0, url2.lastIndexOf('/')) : url2;
       return url1.indexOf(url2) != -1;
-  }
+    }
 
   function regexMatch(url1, url2) {
       return url1.match(url2) !== null;
